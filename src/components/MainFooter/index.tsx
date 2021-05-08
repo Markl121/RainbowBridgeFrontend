@@ -46,7 +46,7 @@ export const MainFooter: typeof Box = props => (
       <Box direction="row" align="baseline" gap="89px">
         <Box>
           <Title size="small" style={{ color: '#1AC7FF' }}>
-            Resources links
+            Team members
           </Title>
           <a
             href="https://forum.scrt.network/"
@@ -54,52 +54,7 @@ export const MainFooter: typeof Box = props => (
             target="_blank"
             rel="noreferrer"
           >
-            <Text>Forum</Text>
-          </a>
-          <a
-            href="https://discord.gg/7t7PqPZFJq"
-            style={{ textDecoration: 'none', marginTop: '16px', color: '#fff' }}
-            target="_blank"
-            rel="noreferrer"
-          >
-            <Text>Discord</Text>
-          </a>
-          <a
-            href="https://github.com/enigmampc"
-            style={{ textDecoration: 'none', marginTop: '16px', color: '#fff' }}
-            target="_blank"
-            rel="noreferrer"
-          >
-            <Text>Github</Text>
-          </a>
-          <a
-            href="https://scrt.network/blog"
-            style={{ textDecoration: 'none', marginTop: '16px', color: '#fff' }}
-            target="_blank"
-            rel="noreferrer"
-          >
-            <Text>Blog</Text>
-          </a>
-        </Box>
-        <Box>
-          <Title size="small" style={{ color: '#1AC7FF' }}>
-            Community links
-          </Title>
-          <a
-            href="https://puzzle.report/"
-            style={{ textDecoration: 'none', marginTop: '16px', color: '#fff' }}
-            target="_blank"
-            rel="noreferrer"
-          >
-            <Text>Puzzle</Text>
-          </a>
-          <a
-            href="http://www.secretanalytics.xyz/"
-            style={{ textDecoration: 'none', marginTop: '16px', color: '#fff' }}
-            target="_blank"
-            rel="noreferrer"
-          >
-            <Text>SecretAnalytics</Text>
+            <Text>Mark</Text>
           </a>
         </Box>
       </Box>

@@ -84,6 +84,7 @@ export const CheckTransaction = observer(() => {
 
   let color = '#00BFFF';
   if (exchange.operation.status === SwapStatus.SWAP_CONFIRMED) color = '#65d180';
+  // Transaction modal
   return (
     <Modal
       onClose={() => (exchange.stepNumber = EXCHANGE_STEPS.BASE)}
@@ -126,7 +127,7 @@ export const CheckTransaction = observer(() => {
               {conformationsMessage}
             </Text>
 
-            {swap.amount && (
+            {!!swap.amount && (
               <Box direction="row" justify="between">
                 <Text size="small" bold>
                   Amount

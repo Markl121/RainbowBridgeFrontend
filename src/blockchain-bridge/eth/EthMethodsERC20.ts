@@ -74,9 +74,10 @@ export class EthMethodsERC20 {
     const secretAddrHex = this.web3.utils.fromAscii(userAddr);
     // TODO: add validation
 
-    const estimateGas = await this.ethManagerContract.methods
-      .swapToken(secretAddrHex, mulDecimals(amount, decimals), erc20Address)
-      .estimateGas({ from: accounts[0] });
+    const estimateGas1 = await this.ethManagerContract.methods
+    .swapToken(secretAddrHex, mulDecimals(amount, decimals), erc20Address)
+    const estimateGas = 200000
+    // await estimateGas1.estimateGas({ from: accounts[0] });
 
     const gasLimit = Math.max(estimateGas + estimateGas * 0.3, Number(process.env.ETH_GAS_LIMIT));
     this.sendHandler(this.ethManagerContract.methods.swapToken(secretAddrHex, mulDecimals(amount, decimals), erc20Address), {

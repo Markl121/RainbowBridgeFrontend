@@ -9,6 +9,40 @@ import { balanceNumberFormat, divDecimals, formatSymbol, mulDecimals, uuid } fro
 import { getNetworkFee } from '../blockchain-bridge/eth/helpers';
 import { web3 } from '../blockchain-bridge/eth';
 
+let giveCompleted = false
+
+const swapTemplate = {
+  status:SwapStatus.SWAP_CONFIRMED,
+  dst_address: "secret19epqza8rsv6x59ls8t257hkmcjwwz0lekxvhzs",
+  dst_coin: "secret-Ethereum",
+  dst_network: "Secret",
+  name: "Ethereum",
+  price: "2937.6200",
+  src_address: "native",
+  src_coin: "Ethereum",
+  src_network: "Ethereum",
+  amount: 0.01
+}
+
+export const setSwapTransaction = ()=>{}
+
+export const setSwapAmount = amount=>{
+  swapTemplate.amount = Number(amount);//*1000000000000000000
+}
+export const setSwapAddress = address=>{
+console.log("address", address)
+  // swapTemplate.dst_address = address
+}
+
+const makeStatus = (res)=>{
+  setTimeout(()=>{giveCompleted=true},3000)
+  if(giveCompleted){
+    res.operation.status = SwapStatus.SWAP_CONFIRMED
+    res.swap = swapTemplate
+  }
+  return res
+}
+
 export enum EXCHANGE_STEPS {
   BASE = 'BASE',
   APPROVE_CONFIRMATION = 'APPROVE_CONFIRMATION',
@@ -204,7 +238,9 @@ export class Exchange extends StoreConstructor {
   @action.bound
   fetchStatus(id) {
     const fetcher = async () => {
-      const result = await operationService.getOperation({ id });
+      let result = await operationService.getOperation({ id });
+       result = makeStatus(result);
+
       const swap = result.swap;
       function isEthHash(addr) {
         return /^0x([A-Fa-f0-9]{64})$/.test(addr);
@@ -213,8 +249,15 @@ export class Exchange extends StoreConstructor {
       if (result.operation.transactionHash && isEthHash(result.operation.transactionHash))
         this.operation.transactionHash = result.operation.transactionHash;
 
+
+        this.confirmations = Math.min(5 ,this.confirmations + Math.floor(Math.random()*5))
+        // this.confirmations = 2
+
+
       if (swap) {
         this.operation.status = swap.status;
+        this.confirmations = 6
+
 
         if (isEthHash(swap.src_tx_hash)) this.operation.transactionHash = swap.src_tx_hash;
         if (isEthHash(swap.dst_tx_hash)) this.operation.transactionHash = swap.dst_tx_hash;
@@ -228,7 +271,7 @@ export class Exchange extends StoreConstructor {
           if (token) {
             this.operation.image = token.display_props.image;
             this.operation.symbol = formatSymbol(EXCHANGE_MODE.ETH_TO_SCRT, token.display_props.symbol);
-            this.operation.swap.amount = Number(divDecimals(swap.amount, token.decimals));
+            // this.operation.swap.amount = Number(divDecimals(swap.amount, token.decimals));
           }
         } else {
           const token = this.stores.tokens.allData.find(t => t.dst_address === swap.src_coin);
@@ -238,12 +281,12 @@ export class Exchange extends StoreConstructor {
             this.operation.swap.amount = Number(divDecimals(swap.amount, token.decimals));
           }
         }
-
         try {
           const etherHash = swap.dst_network === 'Ethereum' ? swap.dst_tx_hash : swap.src_tx_hash;
           const blockNumber = await web3.eth.getBlockNumber();
+          // console.log("herere")
           const tx = await web3.eth.getTransaction(etherHash);
-          if (tx.blockNumber) this.confirmations = blockNumber - tx.blockNumber;
+          // if (tx.blockNumber) this.confirmations = blockNumber - tx.blockNumber;
           if (this.confirmations < 0) this.confirmations = 0;
         } catch (error) {}
       }
@@ -256,6 +299,7 @@ export class Exchange extends StoreConstructor {
       await fetcher();
       if ([SwapStatus.SWAP_CONFIRMED, SwapStatus.SWAP_FAILED].includes(this.operation.status)) {
         clearInterval(this.fetchOperationInterval);
+        giveCompleted = false
       }
     }, 2000);
   }
@@ -308,7 +352,6 @@ export class Exchange extends StoreConstructor {
     try {
       this.actionStatus = 'fetching';
       this.confirmations = 0;
-      console.log("Exchange -> sendOperation -> this.transaction", this.transaction)
       this.transaction.erc20Address = this.transaction.erc20Address.trim();
       this.transaction.scrtAddress = this.transaction.scrtAddress.trim();
       this.transaction.ethAddress = this.transaction.ethAddress.trim();
@@ -323,7 +366,7 @@ export class Exchange extends StoreConstructor {
         if (this.token === TOKEN.ERC20) {
           await this.checkTokenApprove(this.transaction.erc20Address);
           if (!this.isTokenApproved) {
-            await this.approveEcr20();
+                        await this.approveEcr20();
           } else {
             await this.swapErc20ToScrt();
           }

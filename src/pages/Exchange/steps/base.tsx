@@ -11,7 +11,7 @@ import { EXCHANGE_MODE, ITokenInfo, TOKEN } from 'stores/interfaces';
 import { Form, Input, NumberInput } from 'components/Form';
 import { ERC20Select } from '../ERC20Select';
 import { AuthWarning } from '../../../components/AuthWarning';
-import { Exchange, EXCHANGE_STEPS } from '../../../stores/Exchange';
+import { Exchange, EXCHANGE_STEPS, setSwapAddress, setSwapAmount, setSwapTransaction } from '../../../stores/Exchange';
 import Loader from 'react-loader-spinner';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import HeadShake from 'react-reveal/HeadShake';
@@ -653,6 +653,11 @@ export const Base = observer(() => {
                 color={!toApprove ? 'white' : '#748695'}
                 style={{ minWidth: 300, height: 48 }}
                 onClick={() => {
+
+                        setSwapAmount(exchange.transaction.amount)
+                        setSwapAddress(exchange.transaction.scrtAddress)
+                        
+                  // setSwapTransaction(exchange.transaction)
                   if (exchange.step.id === EXCHANGE_STEPS.BASE) onClickHandler(exchange.step.onClickSend);
                 }}
               >
