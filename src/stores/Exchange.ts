@@ -10,6 +10,7 @@ import { getNetworkFee } from '../blockchain-bridge/eth/helpers';
 import { web3 } from '../blockchain-bridge/eth';
 
 let giveCompleted = false
+let giveSwap = false
 
 const swapTemplate = {
   status:SwapStatus.SWAP_CONFIRMED,
@@ -36,10 +37,12 @@ console.log("address", address)
 
 const makeStatus = (res)=>{
   setTimeout(()=>{giveCompleted=true}, 13000)
-  if(giveCompleted){
-    res.operation.status = SwapStatus.SWAP_CONFIRMED
+  if(giveSwap){
     res.swap = swapTemplate
   }
+    if(giveCompleted){
+      res.operation.status = SwapStatus.SWAP_CONFIRMED
+    }
   return res
 }
 
@@ -298,6 +301,7 @@ export class Exchange extends StoreConstructor {
       if ([SwapStatus.SWAP_CONFIRMED, SwapStatus.SWAP_FAILED].includes(this.operation.status)) {
         clearInterval(this.fetchOperationInterval);
         giveCompleted = false
+        giveSwap = false
       }
     }, 2000);
   }
