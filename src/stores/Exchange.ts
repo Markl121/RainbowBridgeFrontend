@@ -258,7 +258,7 @@ export class Exchange extends StoreConstructor {
 
       if (swap) {
         this.operation.status = swap.status;
-        this.confirmations = 6
+        // this.confirmations = 6
 
 
         if (isEthHash(swap.src_tx_hash)) this.operation.transactionHash = swap.src_tx_hash;
