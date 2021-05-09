@@ -48,14 +48,10 @@ export const MainFooter: typeof Box = props => (
           <Title size="small" style={{ color: '#1AC7FF' }}>
             Team members
           </Title>
-          <a
-            href="https://forum.scrt.network/"
-            style={{ textDecoration: 'none', marginTop: '16px', color: '#fff' }}
-            target="_blank"
-            rel="noreferrer"
-          >
-            <Text>Mark</Text>
-          </a>
+          <Text>Brahmapsen</Text>
+          <Text>Guy</Text>
+          <Text>Larry</Text>
+          <Text>Mark</Text>
         </Box>
       </Box>
     </Box>
