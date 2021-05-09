@@ -35,7 +35,7 @@ console.log("address", address)
 }
 
 const makeStatus = (res)=>{
-  setTimeout(()=>{giveCompleted=true},12000)
+  setTimeout(()=>{giveCompleted=true}, 13000)
   if(giveCompleted){
     res.operation.status = SwapStatus.SWAP_CONFIRMED
     res.swap = swapTemplate
