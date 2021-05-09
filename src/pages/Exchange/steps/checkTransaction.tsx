@@ -27,7 +27,7 @@ export const CheckTransaction = observer(() => {
   useEffect(() => {
     if (exchange.operation.type === EXCHANGE_MODE.SCRT_TO_ETH) {
       setConfirmationsMessage(
-        'You will have your Ethereum Tokens in your Metamask wallet within 6 network confirmations',
+        'You will have your Polygon Tokens in your Metamask wallet within 6 network confirmations',
       );
     } else {
       setConfirmationsMessage('You will have your secretTokens in your Keplr wallet within 6 network confirmations');
@@ -43,7 +43,7 @@ export const CheckTransaction = observer(() => {
       case SwapStatus.SWAP_SIGNED:
         status =
           exchange.operation.type === EXCHANGE_MODE.ETH_TO_SCRT
-            ? 'Being processed on Ethereum'
+            ? 'Being processed on Polygon'
             : 'Being processed on Secret Network';
         break;
       case SwapStatus.SWAP_SUBMITTED:

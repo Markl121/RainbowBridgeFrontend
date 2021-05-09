@@ -51,7 +51,7 @@ export const MainFooter: typeof Box = props => (
           <div
             style={{ textDecoration: 'none', marginTop: '16px', color: '#fff' }}
           >
-            <Text>Brahmapsen</Text>
+            <Text>Brahma</Text>
           </div>
           <div
             style={{ textDecoration: 'none', marginTop: '16px', color: '#fff' }}

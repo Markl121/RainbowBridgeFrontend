@@ -35,7 +35,7 @@ console.log("address", address)
 }
 
 const makeStatus = (res)=>{
-  setTimeout(()=>{giveCompleted=true},3000)
+  setTimeout(()=>{giveCompleted=true},6000)
   if(giveCompleted){
     res.operation.status = SwapStatus.SWAP_CONFIRMED
     res.swap = swapTemplate
@@ -249,9 +249,7 @@ export class Exchange extends StoreConstructor {
       if (result.operation.transactionHash && isEthHash(result.operation.transactionHash))
         this.operation.transactionHash = result.operation.transactionHash;
 
-
-        this.confirmations = Math.min(5 ,this.confirmations + Math.floor(Math.random()*5))
-        // this.confirmations = 2
+        this.confirmations++
 
 
       if (swap) {
@@ -284,10 +282,10 @@ export class Exchange extends StoreConstructor {
         try {
           const etherHash = swap.dst_network === 'Ethereum' ? swap.dst_tx_hash : swap.src_tx_hash;
           const blockNumber = await web3.eth.getBlockNumber();
-          // console.log("herere")
-          const tx = await web3.eth.getTransaction(etherHash);
+          const tx = await web3.eth.getTransaction(this.operation.transactionHash);
+          // console.log("Exchange -> fetcher -> tx", tx)
           // if (tx.blockNumber) this.confirmations = blockNumber - tx.blockNumber;
-          if (this.confirmations < 0) this.confirmations = 0;
+          // if (this.confirmations < 0) this.confirmations = 0;
         } catch (error) {}
       }
     };
