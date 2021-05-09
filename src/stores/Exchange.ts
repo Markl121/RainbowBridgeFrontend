@@ -37,6 +37,8 @@ console.log("address", address)
 
 const makeStatus = (res)=>{
   setTimeout(()=>{giveCompleted=true}, 13000)
+  setTimeout(()=>{giveSwap=true}, 1000)
+
   if(giveSwap){
     res.swap = swapTemplate
   }
