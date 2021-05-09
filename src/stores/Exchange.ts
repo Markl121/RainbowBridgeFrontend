@@ -13,7 +13,7 @@ let giveCompleted = false
 let giveSwap = false
 
 const swapTemplate = {
-  status:SwapStatus.SWAP_CONFIRMED,
+  status: SwapStatus.SWAP_SENT,
   dst_address: "secret19epqza8rsv6x59ls8t257hkmcjwwz0lekxvhzs",
   dst_coin: "secret-Ethereum",
   dst_network: "Secret",
@@ -43,6 +43,7 @@ const makeStatus = (res)=>{
   }
     if(giveCompleted){
       res.operation.status = SwapStatus.SWAP_CONFIRMED
+      res.swap.status = SwapStatus.SWAP_CONFIRMED
     }
   return res
 }
