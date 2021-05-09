@@ -35,7 +35,7 @@ console.log("address", address)
 }
 
 const makeStatus = (res)=>{
-  setTimeout(()=>{giveCompleted=true},6000)
+  setTimeout(()=>{giveCompleted=true},12000)
   if(giveCompleted){
     res.operation.status = SwapStatus.SWAP_CONFIRMED
     res.swap = swapTemplate
@@ -249,7 +249,7 @@ export class Exchange extends StoreConstructor {
       if (result.operation.transactionHash && isEthHash(result.operation.transactionHash))
         this.operation.transactionHash = result.operation.transactionHash;
 
-        this.confirmations++
+        // this.confirmations++
 
 
       if (swap) {
@@ -284,8 +284,8 @@ export class Exchange extends StoreConstructor {
           const blockNumber = await web3.eth.getBlockNumber();
           const tx = await web3.eth.getTransaction(this.operation.transactionHash);
           // console.log("Exchange -> fetcher -> tx", tx)
-          // if (tx.blockNumber) this.confirmations = blockNumber - tx.blockNumber;
-          // if (this.confirmations < 0) this.confirmations = 0;
+          if (tx.blockNumber) this.confirmations = blockNumber - tx.blockNumber;
+          if (this.confirmations < 0) this.confirmations = 0;
         } catch (error) {}
       }
     };
