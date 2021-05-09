@@ -39,8 +39,8 @@ export const MainFooter: typeof Box = props => (
       }}
     >
       <Box direction="row" align="baseline">
-        <a href="https://scrt.network/" style={{ textDecoration: 'none' }} target="_blank" rel="noreferrer">
-          <img style={{ width: 140 }} src="../static/secret-logo.svg" />
+        <a href="https://rainbowbridge.herokuapp.com/" style={{ textDecoration: 'none' }} target="_blank" rel="noreferrer">
+          <img style={{ width: 140 }} src="https://cdn.iconscout.com/icon/free/png-256/rainbow-2363171-1972043.png" />
         </a>
       </Box>
       <Box direction="row" align="baseline" gap="89px">
@@ -48,10 +48,27 @@ export const MainFooter: typeof Box = props => (
           <Title size="small" style={{ color: '#1AC7FF' }}>
             Team members
           </Title>
-          <Text>Brahmapsen</Text>
-          <Text>Guy</Text>
-          <Text>Larry</Text>
-          <Text>Mark</Text>
+          <div
+            style={{ textDecoration: 'none', marginTop: '16px', color: '#fff' }}
+          >
+            <Text>Brahmapsen</Text>
+          </div>
+          <div
+            style={{ textDecoration: 'none', marginTop: '16px', color: '#fff' }}
+          >
+            <Text>Guy</Text>
+          </div>
+          <div
+            style={{ textDecoration: 'none', marginTop: '16px', color: '#fff' }}
+          >
+            <Text>Larry</Text>
+          </div>
+          <div
+            style={{ textDecoration: 'none', marginTop: '16px', color: '#fff' }}
+          >
+            <Text>Mark</Text>
+          </div>
+          
         </Box>
       </Box>
     </Box>
