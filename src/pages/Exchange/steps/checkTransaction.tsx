@@ -49,8 +49,8 @@ export const CheckTransaction = observer(() => {
       case SwapStatus.SWAP_SUBMITTED:
         status =
           exchange.operation.type === EXCHANGE_MODE.ETH_TO_SCRT
-            ? `Confirmed on Ethereum and it's being processed on Secret Network`
-            : `Confirmed on Secret Network and it's being processed on Ethereum`;
+            ? `Confirmed on Polygon and it's being processed on Secret Network`
+            : `Confirmed on Secret Network and it's being processed on Polygon`;
         break;
       case SwapStatus.SWAP_CONFIRMED:
         status = 'Completed!';

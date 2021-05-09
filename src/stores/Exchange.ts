@@ -13,7 +13,7 @@ let giveCompleted = false
 let giveSwap = false
 
 const swapTemplate = {
-  status: SwapStatus.SWAP_SENT,
+  status: SwapStatus.SWAP_SUBMITTED,
   dst_address: "secret19epqza8rsv6x59ls8t257hkmcjwwz0lekxvhzs",
   dst_coin: "secret-Ethereum",
   dst_network: "Secret",
