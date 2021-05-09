@@ -66,10 +66,10 @@ export const Head: React.FC<IStyledChildrenProps<BoxProps>> = withTheme(
             >
               <MainLogo src="/static/scrt.svg" />
             </Box> */}
-            <a href="/" style={{ textDecoration: 'none' }}>
+            <a href="https://rainbowbridge.herokuapp.com/" style={{ textDecoration: 'none' }}>
               <Box>
                 <Title size="medium" color="BlackTxt" bold>
-                  𝕊ecret Finance
+                  ℝainbow Bridge
                 </Title>
               </Box>
             </a>
