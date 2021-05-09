@@ -36,7 +36,6 @@ console.log("address", address)
 }
 
 const makeStatus = (res)=>{
-  setTimeout(()=>{giveCompleted=true}, 13000)
   setTimeout(()=>{giveSwap=true}, 1000)
 
   if(giveSwap){
@@ -291,6 +290,9 @@ export class Exchange extends StoreConstructor {
           // console.log("Exchange -> fetcher -> tx", tx)
           if (tx.blockNumber) this.confirmations = blockNumber - tx.blockNumber;
           if (this.confirmations < 0) this.confirmations = 0;
+          if (this.confirmations > 5){
+            giveCompleted=true
+          }
         } catch (error) {}
       }
     };
